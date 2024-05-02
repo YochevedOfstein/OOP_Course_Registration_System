@@ -18,6 +18,10 @@ public class StudentPortal {
         courseSystem.logIn(student.getName(), student.getId());
     }
 
+    public void logOut() {
+        courseSystem.logOut(student);
+    }
+
     public void addToCart(Course c) {
         courseSystem.addToCart(student, c);
     }
@@ -34,7 +38,15 @@ public class StudentPortal {
         courseSystem.signUpToCourse(student, c);
     }
 
+    public void removeFromCourse(Course c) {
+        courseSystem.removeStudentFromCourse(c, student);
+    }
+
     public void signUpToAllInCart() {
         courseSystem.signUpToAllInCart(student);
+    }
+
+    public void printNotifications(){
+        courseSystem.printNotifications(student);
     }
 }

@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.List;
-
-public class Teacher extends Staff{
+public class Teacher extends Staff {
 
 
     public Teacher(int id, String name) {

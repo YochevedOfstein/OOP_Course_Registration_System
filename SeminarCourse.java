@@ -1,4 +1,4 @@
-public class SeminarCourse extends Course implements CourseType{
+public class SeminarCourse extends Course {
 
 
     public SeminarCourse(String name, int courseNumber, int capacity){
@@ -13,6 +13,6 @@ public class SeminarCourse extends Course implements CourseType{
 
     @Override
     public void displayCourseInfo() {
-        System.out.println("Seminar course: " + getName() + ", course number: " + getCourseNumber());
+        System.out.println("Seminar course: " + getName() + ", course number: " + getCourseNumber() + ", maximum capacity: " + getCapacity() + ", number of student: " + numOfStudents());
     }
 }

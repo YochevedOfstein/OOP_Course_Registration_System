@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class CourseSystem {
     private static CourseSystem instance;
@@ -106,12 +107,26 @@ public class CourseSystem {
 
     public void addToCart(Student u, Course c) {
         if (!u.isConnected()) {
-            System.out.println(u.getName() + " not connected - must log in first");
+            System.out.println("Can't add to cart - " + u.getName() + " is not connected");
         } else {
-            u.getMyCart().addToCart(c);
+            if(c.isFull){
+                System.out.println("Course " + c.getCourseNumber() +  " is full - can't add to cart");
+                System.out.println("Would you like an update if any room frees up? (Yes/No)");
+                Scanner scanner = new Scanner(System.in);
+                String ans = scanner.nextLine();
+                if (Objects.equals(ans, "Yes")) {
+                    if(!c.getObservers().contains(u)){
+                        c.addObserver(u);
+                        System.out.println(u.getName() + " will receive an update if any room frees up in course " + c.getCourseNumber());
+                    }
+                }
+            }
+            else{
+                u.getMyCart().addToCart(c);
+                System.out.println("Course " + c.getCourseNumber() + " has been added to " + u.getName() + "s cart");
+            }
         }
     }
-
 
     public void removeFromCart(Student u, Course c) {
         if (!u.isConnected()) {
@@ -120,7 +135,6 @@ public class CourseSystem {
              u.getMyCart().removeFromCart(c);
         }
     }
-
 
     public void clearCart(Student u) {
         if (!u.isConnected()) {
@@ -135,12 +149,17 @@ public class CourseSystem {
             System.out.println(u.getName() + " not connected - must log in first");
         } else {
             if (!u.getMyCart().getCartContent().contains(c)) {
-                System.out.println("Course " + c.getName() + "is not in shopping cart");
+                System.out.println("Course " + c.getName() + " is not in shopping cart");
             } else {
+                System.out.println(u.getName() + " signed up to course " + c.getCourseNumber());
                 c.addStudent(u);
                 removeFromCart(u,c);
             }
         }
+    }
+
+    public void removeStudentFromCourse(Course c, Student u){
+        c.removeStudent(u);
     }
 
     public void signUpToAllInCart(Student u) {
@@ -148,11 +167,29 @@ public class CourseSystem {
             System.out.println(u.getName() + " not connected - must log in first");
         } else {
             List<Course> cart = u.getMyCart().getCartContent();
-            for (Course c : cart) {
-                signUpToCourse(u,c);
+            if(cart.isEmpty()){
+                System.out.println("Shopping cart is empty");
             }
-            u.getMyCart().clearCart();
+            for(Course c : cart) {
+                c.addStudent(u);
+            }
+            System.out.println(u.getName() + "signed up to all courses in his cart");
+            clearCart(u);
         }
     }
 
+    public void printNotifications(Student u) {
+        if (!u.isConnected()) {
+            System.out.println(u.getName() + " not connected - must log in first");
+        }
+        else{
+            if(!u.hasNotifications()){
+                System.out.println(u.getName() + " doesn't have notifications");
+            }
+            else{
+                System.out.println(u.getName() + "s notifications:");
+                u.printNotifications();
+            }
+        }
+    }
 }

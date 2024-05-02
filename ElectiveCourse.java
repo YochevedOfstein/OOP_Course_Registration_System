@@ -1,4 +1,4 @@
-public class ElectiveCourse extends Course implements CourseType{
+public class ElectiveCourse extends Course{
 
 
     public ElectiveCourse(String name, int courseNumber, int capacity){
@@ -12,6 +12,6 @@ public class ElectiveCourse extends Course implements CourseType{
 
     @Override
     public void displayCourseInfo() {
-        System.out.println("Elective course: " + getName() + ", course number: " + getCourseNumber());
+        System.out.println("Elective course: " + getName() + ", course number: " + getCourseNumber() + ", maximum capacity: " + getCapacity() + ", number of student: " + numOfStudents());
     }
 }

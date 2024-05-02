@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class MandatoryCourse extends Course implements CourseType{
+public class MandatoryCourse extends Course {
 
 
 
@@ -15,7 +15,7 @@ public class MandatoryCourse extends Course implements CourseType{
 
     @Override
     public void displayCourseInfo() {
-        System.out.println("Mandatory course: " + getName() + ", course number: " + getCourseNumber());
+        System.out.println("Mandatory course: " + getName() + ", course number: " + getCourseNumber() + ", maximum capacity: " + getCapacity() + ", number of student: " + numOfStudents());
     }
 
 

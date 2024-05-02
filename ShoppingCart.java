@@ -10,14 +10,9 @@ public class ShoppingCart {
     }
 
     public void addToCart(Course c){
-        if(c.isFull){
-            System.out.println("Course is full - can't add to cart");
-        }
-        else{
-            Mycart.add(c);
-            System.out.println("Course has been added to cart");
-        }
+        Mycart.add(c);
     }
+
     public void removeFromCart(Course c){
         if(!Mycart.contains(c)){
             System.out.println("Course is not in cart");
@@ -29,10 +24,6 @@ public class ShoppingCart {
     public void clearCart(){
         Mycart.clear();
         System.out.println("Shopping cart has been cleared");
-    }
-
-    public boolean isEmpty(){
-        return Mycart.isEmpty();
     }
 
     public List<Course> getCartContent(){

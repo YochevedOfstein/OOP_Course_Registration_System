@@ -34,6 +34,10 @@ public class Student extends User implements Observer{
         return myCart;
     }
 
+    public boolean hasNotifications(){
+        return !notifications.isEmpty();
+    }
+
     public void printNotifications(){
         for(String notification : notifications){
             System.out.println(notification);

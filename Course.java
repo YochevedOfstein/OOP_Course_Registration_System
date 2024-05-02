@@ -42,7 +42,6 @@ public abstract class Course {
             if(students.size() == capacity){
                 isFull = true;
             }
-            observers.add(s);
         }
     }
 
@@ -71,6 +70,14 @@ public abstract class Course {
         return capacity;
     }
 
+    public int numOfStudents(){
+        return students.size();
+    }
+
+    public List<Observer> getObservers(){
+        return observers;
+    }
+
     public void addObserver(Student s){
         observers.add(s);
     }
@@ -88,4 +95,6 @@ public abstract class Course {
     }
 
     abstract void displayCourseInfo();
+
+    abstract String getCourseType();
 }
