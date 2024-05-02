@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public abstract class Course {
+public abstract class Course implements Observerble{
 
     private String name;
     private int courseNumber;
@@ -78,6 +78,9 @@ public abstract class Course {
         return observers;
     }
 
+    public void removeObserver(Student s){
+        observers.remove(s);
+    }
     public void addObserver(Student s){
         observers.add(s);
     }

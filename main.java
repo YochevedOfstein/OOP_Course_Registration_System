@@ -4,7 +4,7 @@ public class main {
     public static void main(String[] args) {
         CourseSystem courseSystem = CourseSystem.getInstance();
 
-        // Create users
+
         Teacher teacher = new Teacher(1, "joy");
         TeachersAssistant ta = new TeachersAssistant(11, "chen");
         Student student1 = new Student(101, "alice");
@@ -12,14 +12,11 @@ public class main {
         Student student3 = new Student(103, "avi");
         Student student4 = new Student(104, "mor");
 
-        // Sign up users
         courseSystem.signUp(teacher);
         courseSystem.signUp(ta);
 
-        // Trying to log in a user that's already logged in
         courseSystem.logIn("joy", 1);
 
-        // Create a course
         courseSystem.createCourse(teacher, "Seminar", "Linear algebra", 1001, 20);
         courseSystem.createCourse(ta, "Mandatory", "OOP", 1002,10);
         courseSystem.createCourse(ta, "Seminar", "OOP", 1002,10);
@@ -27,51 +24,42 @@ public class main {
         Course a = courseSystem.getCourse(1001);
         Course b = courseSystem.getCourse(1002);
 
-        StudentPortal studentPortal1 = new StudentPortal(student1);
-        StudentPortal studentPortal2 = new StudentPortal(student2);
-        StudentPortal studentPortal3 = new StudentPortal(student3);
-        StudentPortal studentPortal4 = new StudentPortal(student4);
+        StudentPortal studentPortal = new StudentPortal();
 
-        studentPortal1.signUp();
 
-        studentPortal1.addToCart(a);
-        studentPortal1.addToCart(b);
+        studentPortal.signUp(student1);
 
-        studentPortal1.removeFromCart(a);
+        studentPortal.addToCart(a,student1);
+        studentPortal.addToCart(b,student1);
 
-        studentPortal1.signUpToAllInCart();
+        studentPortal.removeFromCart(a, student1);
+
+        studentPortal.signUpToAllInCart(student1);
 
         courseSystem.createCourse(ta, "Elective", "English", 1010,3);
 
         Course c = courseSystem.getCourse(1010);
 
-        studentPortal1.addToCart(c);
-        studentPortal1.signUpToCourse(c);
-        studentPortal1.logOut();
+        studentPortal.addToCart(c, student1);
+        studentPortal.signUpToCourse(c,student1);
+        studentPortal.logOut(student1);
 
-        studentPortal2.signUp();
-        studentPortal2.addToCart(c);
-        studentPortal2.signUpToCourse(c);
+        studentPortal.signUp(student2);
+        studentPortal.addToCart(c, student2);
+        studentPortal.signUpToCourse(c, student2);
 
-        studentPortal3.addToCart(c);
-        studentPortal3.signUp();
-        studentPortal3.addToCart(c);
-        studentPortal3.addToCart(a);
-        studentPortal3.addToCart(b);
-        studentPortal3.signUpToAllInCart();
+        studentPortal.addToCart(c,student3);
+        studentPortal.signUp(student3);
+        studentPortal.addToCart(c, student3);
+        studentPortal.addToCart(a ,student3);
+        studentPortal.addToCart(b, student3);
+        studentPortal.signUpToAllInCart(student3);
 
-        studentPortal4.signUp();
-        studentPortal4.addToCart(c);
+        studentPortal.signUp(student4);
+        studentPortal.addToCart(c, student4);
 
-        studentPortal3.removeFromCourse(c);
-        studentPortal4.printNotifications();
-
-
-
-
-
-
-
+        studentPortal.removeFromCourse(c, student3);
+        studentPortal.printNotifications(student4);
 
     }
 }
